@@ -107,6 +107,7 @@ afterEvaluate {
             // Create a Maven publication called "release".
             release(MavenPublication){
                 // Applies the component for release build variant.
+
                 from components.release
                 // you can then customize attributes of the publication as show below.
 //                groupId = 'com.z1media.android'

@@ -1,4 +1,4 @@
 rootProject.name = "z1-android-sdk"
 include ':app'
-include ':z1media'
+//include ':z1media'
 include ':core'

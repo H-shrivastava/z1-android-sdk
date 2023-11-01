@@ -6,9 +6,9 @@ buildscript {
         google()
         mavenCentral()
         maven { url = uri("https://artifacts.applovin.com/android") }
-//        maven {
-//            url 'https://android-sdk.is.com/'
-//        }
+        maven {
+            url 'https://android-sdk.is.com/'
+        }
 
     }
 

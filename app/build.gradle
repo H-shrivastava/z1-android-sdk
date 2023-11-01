@@ -1,0 +1,96 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'applovin-quality-service'
+}
+
+applovin {
+    /* AD_REVIEW_KEY_HERE */
+    apiKey = "n6CQpJGDyBImJNItxm4lPKsu0FMX0UtrBloEfIcKRfFB2c8B9Kt9ya5UmtAUOkymqDxNr9ZmbcpxDzsagFLKTO"
+}
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.z1media.android"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('SignIn-Keystore/keystore.jks')
+            storePassword 'android'
+            keyPassword 'android'
+            keyAlias 'WalletCircle'
+        }
+    }
+
+}
+repositories {
+    maven {
+        //IronSource
+        url "https://android-sdk.is.com/"
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+    implementation project(path: ':z1media')
+//    implementation 'org.bitbucket.ozock:z1-android-sdk:1.3.7'
+//    implementation 'com.z1media.android:z1-android-sdk:1.2.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+}
+task copyLibs(type: Copy) {
+    from configurations.implementation
+    into 'libs'
+}
